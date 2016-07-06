@@ -11,6 +11,7 @@ class Male
 
   Male();
   int get_timeleft();
+  int get_respl();
   void day_passed();
 
 
@@ -18,6 +19,11 @@ class Male
  private:
 
   int m_timeleft;
+  int m_resplenish;
+  int m_resplDaily;
+  bool m_spite;
+  int m_beforeReady;
+  bool m_ready;
 
 };
 

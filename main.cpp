@@ -2,27 +2,29 @@
 #include "Female.h"
 #include "Male.h"
 
+#include <time.h>
+#include <random>
+
 using namespace std;
 
 int main()
 {
+  cout << "Hello World" << endl;
 
-   cout << "Hello World" << endl;
+  srand (time(NULL));
 
+  Female test;
 
-   Female test;
+  Male test2;
 
-   Male test2;
+  cout << test.get_cycle() << endl;
+  cout << test2.get_respl() << endl;
 
-   cout << test.get_timeleft() << endl;
-   cout << test2.get_timeleft() << endl;
+  test.day_passed();
+  test2.day_passed();
 
-   test.day_passed();
-   test2.day_passed();
-
-   cout << test.get_timeleft() << endl;
-   cout << test2.get_timeleft() << endl;
-
+  cout << test.get_cycle() << endl;
+  cout << test2.get_respl() << endl;
 
   return 0;
 }

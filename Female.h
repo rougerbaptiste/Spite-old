@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+
 class Female
 {
 
@@ -11,6 +12,7 @@ class Female
 
   Female();
   int get_timeleft();
+  int get_cycle();
   void day_passed();
 
 
@@ -18,6 +20,8 @@ class Female
  private:
 
   int m_timeleft;
+  int m_cycle;
+  int m_cycleDaily;
 
 };
 
