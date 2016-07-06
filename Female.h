@@ -14,6 +14,9 @@ class Female
   int get_timeleft();
   int get_cycle();
   void day_passed();
+  void set_partner(int number);
+  void remove_partner();
+  int get_partner();
 
 
 
@@ -22,6 +25,7 @@ class Female
   int m_timeleft;
   int m_cycle;
   int m_cycleDaily;
+  int m_partner;
 
 };
 

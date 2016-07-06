@@ -13,6 +13,9 @@ class Male
   int get_timeleft();
   int get_respl();
   void day_passed();
+  void set_partner(int number);
+  void remove_partner();
+  int get_partner();
 
 
 
@@ -24,6 +27,7 @@ class Male
   bool m_spite;
   int m_beforeReady;
   bool m_ready;
+  int m_partner;
 
 };
 
