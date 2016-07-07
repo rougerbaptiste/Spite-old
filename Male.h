@@ -16,6 +16,9 @@ class Male
   void set_partner(int number);
   void remove_partner();
   int get_partner();
+  bool get_ready();
+  int get_beforeReady();
+  bool get_spite();
 
 
 

@@ -21,11 +21,11 @@ Male::Male()
   testSpite = rand()%2;
   if(testSpite == 0){
     m_spite = true;
-    m_beforeReady = rand()%10 +1;
+    m_beforeReady = rand()%100 +1;
   }
   else{
     m_spite = false;
-    m_beforeReady = 0;
+    m_beforeReady = 100;
   }
 
   if(m_resplenish == 100){
@@ -58,6 +58,21 @@ int Male::get_partner()
   return m_partner;
 }
 
+bool Male::get_ready()
+{
+  return m_ready;
+}
+
+int Male::get_beforeReady()
+{
+  return m_beforeReady;
+}
+
+
+bool Male::get_spite()
+{
+  return m_spite;
+}
 
 void Male::day_passed()
 {
