@@ -12,8 +12,31 @@ Male::Male()
 {
   // srand (time(NULL));
 
-  m_timeleft = 25 + rand()%10 +1;
+  m_timeleft = rand()%30 +1;
   m_resplenish = rand()%100 +1;
+  m_resplDaily = 10;
+  m_partner = -1;
+
+  int testSpite (-1);
+  testSpite = rand()%2;
+  if(testSpite == 0){
+    m_spite = true;
+    m_beforeReady = rand()%100 +1;
+  }
+  else{
+    m_spite = false;
+    m_beforeReady = 100;
+  }
+
+  if(m_resplenish == 100){
+    m_ready = true;
+  }
+}
+
+void Male::new_born()
+{
+  m_timeleft = 29 + rand()%3;
+  m_resplenish = -50;
   m_resplDaily = 10;
   m_partner = -1;
 

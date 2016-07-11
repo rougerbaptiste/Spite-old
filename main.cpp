@@ -2,6 +2,7 @@
 #include "Female.h"
 #include "Male.h"
 
+#include <vector>
 #include <time.h>
 #include <random>
 
@@ -21,23 +22,40 @@ int main()
   Male males [mal_nb];
   while (day < length) {
 
-    cout << females[1].get_timeleft() << endl;
-    cout << males[1].get_timeleft() << endl << endl;
+    // cout << females[1].get_timeleft() << endl;
+    // cout << males[1].get_timeleft() << endl << endl;
     // males are looking for partners
+
+
+
+    vector<int> birthingFemales;
+    for(int i(0); i < fem_nb; i++){
+      if(females[i].get_gestation() >= 100){
+        // cout << "plop" << endl;
+        birthingFemales.push_back(i);
+      }
+    }
+
+    cout << birthingFemales.size() << endl ; //<< endl;
 
     // create a vector with the females that can give birth
     for(int i(0); i < fem_nb; i++){
-      if((females[i].get_timeleft() <= 0) & ("if a female is ready to give birth") ){
+      // cout << (birthingFemales.size() > 0) << endl;
+      if((females[i].get_timeleft() <= 0) & (birthingFemales.size() > 0) ){
+        // cout << "plouf" << endl << endl;
         females[i].new_born();
+
+        // cout << females[i].get_cycle() << endl << females[i].get_timeleft() << endl << females[i].get_gestation() << endl << endl;
       }
     }
 
+    // simple birthing for males.
     for(int i(0); i < mal_nb; i++){
-      if(females[i].get_timeleft() <= 0){
-
+      if( (males[i].get_timeleft() <= 0) & (birthingFemales.size() > 0) ){
+        // cout << "ploup" << endl << endl;
+        males[i].new_born();
       }
     }
-
 
 
     for (int i (0); i < mal_nb; i++) {
@@ -65,10 +83,28 @@ int main()
 
     for(int i(0); i < fem_nb; i++){
       females[i].day_passed();
+      if( (females[i].get_cycle()>=100) & (females[i].get_partner() != -1) ){
+          females[i].set_gestating();
+      }
     }
     for(int i(0); i < mal_nb; i++){
       males[i].day_passed();
     }
+    for(int i(0); i < fem_nb; i++){
+      if( (males[females[i].get_partner()].get_timeleft() <=0) & (females[i].get_gestation() != true) ){
+        females[i].set_partner(-1);
+        females[i].set_spitePartner(false);
+      }
+    }
+    for(int i(0); i < mal_nb; i++){
+      if( females[males[i].get_partner()].get_cycle() >= 100){
+        males[i].set_partner(-1);
+      }
+      if( females[males[i].get_partner()].get_timeleft() <=0 ){
+        males[i].set_partner(-1);
+      }
+    }
+
     day +=1;
   }
 
@@ -97,11 +133,18 @@ int main()
   //
   // cout << test.get_cycle() << endl;
   // cout << test2.get_respl() << endl;
+  //
+  // Female test;
+  // cout << test.get_cycle() << endl;
+  // test.new_born();
+  // cout << test.get_cycle() << endl << endl;
+  //
+  // vector<int> v (5,3);
+  //
+  // for(int i(0); i< int(v.size()); i++){
+  //   cout << v[i] << endl;
+  // }
 
-  Female test;
-  cout << test.get_cycle() << endl;
-  test.new_born();
-  cout << test.get_cycle() << endl << endl;
 
   return 0;
 }

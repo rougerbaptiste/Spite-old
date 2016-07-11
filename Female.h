@@ -19,6 +19,8 @@ class Female
   int get_partner();
   void new_born();
   void set_spitePartner(bool spite);
+  int get_gestation();
+  void set_gestating();
 
 
 
@@ -29,6 +31,8 @@ class Female
   int m_cycleDaily;
   int m_partner;
   bool m_spitePartner;
+  bool m_gestating;
+  int m_gestation;
 
 };
 
