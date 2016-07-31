@@ -19,7 +19,8 @@ class Male
   bool get_ready();
   int get_beforeReady();
   bool get_spite();
-  void new_born();
+  void new_born(bool spite);
+  int get_percentRespl();
 
 
 

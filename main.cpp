@@ -36,7 +36,7 @@ int main()
       }
     }
 
-    cout << birthingFemales.size() << endl ; //<< endl;
+    // cout << birthingFemales.size() << endl ; //<< endl;
 
     // create a vector with the females that can give birth
     for(int i(0); i < fem_nb; i++){
@@ -53,10 +53,35 @@ int main()
     for(int i(0); i < mal_nb; i++){
       if( (males[i].get_timeleft() <= 0) & (birthingFemales.size() > 0) ){
         // cout << "ploup" << endl << endl;
-        males[i].new_born();
+
+        vector<int> percentBirthing(0);
+        int birthingNb(birthingFemales.size());
+        int prev_percent(0);
+        int new_percent(0);
+        for(int i(0); i < birthingNb; i++){
+          // cout << "plof" << endl;
+          new_percent = females[birthingFemales[i]].get_percentRespl();
+
+          // cout << new_percent << " ";
+
+          percentBirthing.push_back(  prev_percent + new_percent  );
+
+          prev_percent = new_percent;
+          // cout << "plouf" << endl;
+        }
+        percentBirthing.push_back(prev_percent +1);
+
+        for(int i(0); i < (birthingNb+2); i++){
+          // cout << percentBirthing[i] << " ";
+        }
+
+
+        males[i].new_born(false);
       }
     }
 
+    // cout << females[1].get_gestation() << endl << females[1].get_percentRespl() << endl << endl;
+    females[1].get_infos();
 
     for (int i (0); i < mal_nb; i++) {
       if(  (males[i].get_partner()==-1) & (males[i].get_ready() == true)){ // the male is not grip to a female
@@ -66,9 +91,10 @@ int main()
         while( (tries < maxTries) & (found != true)){
 
           int pickedFem (rand()%fem_nb);
-          if((females[pickedFem].get_partner()==-1) & (females[pickedFem].get_cycle() >= males[i].get_beforeReady() ) ){
+          if((females[pickedFem].get_partner()==-1) & (females[pickedFem].get_cycle() >= males[i].get_beforeReady() ) & (females[pickedFem].get_gestation() == 0) ){
             females[pickedFem].set_partner(i);
             females[pickedFem].set_spitePartner(males[i].get_spite());
+            females[pickedFem].set_percentRespl(males[i].get_respl());
             males[i].set_partner(pickedFem);
             found = true;
           }
@@ -79,21 +105,35 @@ int main()
     }
 
 
-
-
     for(int i(0); i < fem_nb; i++){
-      females[i].day_passed();
+
+      if(females[i].get_timeleft() > 0){
+        females[i].day_passed();
+      }
       if( (females[i].get_cycle()>=100) & (females[i].get_partner() != -1) ){
-          females[i].set_gestating();
+        females[i].set_gestating();
       }
     }
     for(int i(0); i < mal_nb; i++){
-      males[i].day_passed();
+      if(males[i].get_timeleft() > 0){
+        males[i].day_passed();
+      }
     }
+
     for(int i(0); i < fem_nb; i++){
       if( (males[females[i].get_partner()].get_timeleft() <=0) & (females[i].get_gestation() != true) ){
         females[i].set_partner(-1);
         females[i].set_spitePartner(false);
+        females[i].set_percentRespl(0);
+      }
+      else if( (males[females[i].get_partner()].get_partner() != -1)  & (females[i].get_gestation() != true) ){
+        females[i].set_percentRespl(males[females[i].get_partner()].get_respl());
+        if(females[i].get_percentRespl() <0 ){
+          females[i].set_percentRespl(0);
+        }
+        else if (females[i].get_percentRespl() > 100 ){
+          females[i].set_percentRespl(0);
+        }
       }
     }
     for(int i(0); i < mal_nb; i++){

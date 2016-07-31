@@ -9,12 +9,13 @@ Female::Female()
   m_cycleDaily=5;
   m_partner = -1;
 
-  m_timeleft = rand()%30 +1;
+  m_timeleft = rand()%40 +1;
   m_cycle = rand()%100 +1;
   m_spitePartner = false;
 
   m_gestating = false;
   m_gestation = 0;
+  m_percentRespl = 0;
 
 }
 
@@ -23,12 +24,25 @@ void Female::new_born()
   m_cycleDaily=5;
   m_partner = -1;
 
-  m_timeleft = 29 + rand()%3;
-  m_cycle = -20;
+  m_timeleft = 39 + rand()%3;
+  m_cycle = -10;
   m_spitePartner = false;
 
   m_gestating = false;
   m_gestation = 0;
+  m_percentRespl = 0;
+}
+
+void Female::get_infos()
+{
+  cout << "Partner : " << m_partner << endl;
+  cout << "Time left : " << m_timeleft << endl;
+  cout << "Cycle : " << m_cycle << endl;
+  cout << "Gestating : " << m_gestating << endl;
+  cout << "Spite part. : " << m_spitePartner << endl;
+  cout << "Gestation : " << m_gestation << endl;
+  cout << "Percent Respl. : " << m_percentRespl << endl;
+  cout << "==========" << endl;
 }
 
 // Female::Female(int day)
@@ -81,6 +95,16 @@ void Female::set_gestating()
   m_gestating = true;
 }
 
+int Female::get_percentRespl()
+{
+  return m_percentRespl;
+}
+
+void Female::set_percentRespl(int percent)
+{
+  m_percentRespl = percent;
+}
+
 void Female::day_passed()
 {
   m_timeleft -=1;
@@ -99,6 +123,9 @@ void Female::day_passed()
     if(m_gestation > 210){
       m_gestation =0;
       m_gestating = false;
+      m_partner = -1;
+      m_percentRespl = 0;
+      m_spitePartner = false;
       m_cycle = 0;
     }
   }

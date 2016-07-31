@@ -12,13 +12,14 @@ Male::Male()
 {
   // srand (time(NULL));
 
-  m_timeleft = rand()%30 +1;
+  m_timeleft = rand()%40 +1;
   m_resplenish = rand()%100 +1;
   m_resplDaily = 10;
   m_partner = -1;
 
   int testSpite (-1);
   testSpite = rand()%2;
+  testSpite = 1;
   if(testSpite == 0){
     m_spite = true;
     m_beforeReady = rand()%100 +1;
@@ -33,16 +34,15 @@ Male::Male()
   }
 }
 
-void Male::new_born()
+void Male::new_born(bool spite)
 {
-  m_timeleft = 29 + rand()%3;
+  m_timeleft = 39 + rand()%3;
   m_resplenish = -50;
   m_resplDaily = 10;
   m_partner = -1;
+  m_ready = false;
 
-  int testSpite (-1);
-  testSpite = rand()%2;
-  if(testSpite == 0){
+  if(spite == true){
     m_spite = true;
     m_beforeReady = rand()%100 +1;
   }
@@ -51,9 +51,6 @@ void Male::new_born()
     m_beforeReady = 100;
   }
 
-  if(m_resplenish == 100){
-    m_ready = true;
-  }
 }
 
 int Male::get_timeleft()
@@ -95,6 +92,11 @@ int Male::get_beforeReady()
 bool Male::get_spite()
 {
   return m_spite;
+}
+
+int Male::get_percentRespl()
+{
+  return m_resplenish;
 }
 
 void Male::day_passed()

@@ -21,6 +21,9 @@ class Female
   void set_spitePartner(bool spite);
   int get_gestation();
   void set_gestating();
+  int get_percentRespl();
+  void set_percentRespl(int percent);
+  void get_infos();
 
 
 
@@ -33,6 +36,7 @@ class Female
   bool m_spitePartner;
   bool m_gestating;
   int m_gestation;
+  int m_percentRespl;
 
 };
 
